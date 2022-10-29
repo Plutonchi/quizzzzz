@@ -40,7 +40,6 @@ class Option extends StatelessWidget {
             onTap: press,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
               margin: EdgeInsets.only(top: kDefaultPadding),
               padding: EdgeInsets.all(kDefaultPadding),
               decoration: BoxDecoration(
@@ -66,10 +65,12 @@ class Option extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: getTheRightColor()),
                     ),
-                    child: getTheRightColor() == kGrayColor ?null : Icon(
-                      getTheRightIcon(),
-                      size: 16,
-                    ),
+                    child: getTheRightColor() == kGrayColor
+                        ? null
+                        : Icon(
+                            getTheRightIcon(),
+                            size: 16,
+                          ),
                   ),
                 ],
               ),

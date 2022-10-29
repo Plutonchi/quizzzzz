@@ -16,7 +16,7 @@ class QuestionmCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionControllere _controllere = Get.put(QuestionControllere());
+    QuestionControllere _controller = Get.put(QuestionControllere());
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -42,7 +42,7 @@ class QuestionmCard extends StatelessWidget {
             (index) => Option(
               index: index,
               text: question.options[index],
-              press: () => _controllere.checkAns(question, index),
+              press: () => _controller.checkAns(question, index),
             ),
           ),
         ],

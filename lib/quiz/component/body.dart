@@ -31,16 +31,21 @@ class Body extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                child: Text.rich(
-                  TextSpan(
-                    text: "Question 1",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: kGrayColor),
-                    children: [
-                      TextSpan(text: "/10", style: TextStyle(fontSize: 15)),
-                    ],
+                child: Obx(
+                  () => Text.rich(
+                    TextSpan(
+                      text:
+                          "Question ${_questionsController.questionNumber.value}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          .copyWith(color: kGrayColor),
+                      children: [
+                        TextSpan(
+                            text: "/${_questionsController.questions.length}",
+                            style: TextStyle(fontSize: 15)),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -52,6 +57,7 @@ class Body extends StatelessWidget {
               ),
               Expanded(
                 child: PageView.builder(
+                  onPageChanged: _questionsController.updateTheQnNum,
                   physics: NeverScrollableScrollPhysics(),
                   controller: _questionsController.pageController,
                   itemCount: _questionsController.questions.length,

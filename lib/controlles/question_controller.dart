@@ -50,11 +50,18 @@ class QuestionControllere extends GetxController
       ..addListener(() {
         update();
       });
-    _animationController.forward();
+    _animationController.forward().whenComplete(nextQuestion);
 
     _pageController = PageController();
 
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    _animationController.dispose();
+    _pageController.dispose();
   }
 
   void checkAns(Question question, int selectedindex) {
@@ -71,14 +78,18 @@ class QuestionControllere extends GetxController
   }
 
   void nextQuestion() {
-    if (_questionNumber.value != _questions.length){
-        _isAnswered = false;
+    if (_questionNumber.value != _questions.length) {
+      _isAnswered = false;
       _pageController.nextPage(
         duration: Duration(milliseconds: 250),
         curve: Curves.ease,
       );
       _animationController.reset();
-      _animationController.forward();
-    }
+      _animationController.forward().whenComplete(nextQuestion);
+    } else {}
+  }
+
+  void updateTheQnNum(int index) {
+    _questionNumber.value = index + 1;
   }
 }
