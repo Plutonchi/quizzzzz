@@ -25,8 +25,8 @@ class _ProgressBarState extends State<ProgressBar> {
         ),
         borderRadius: BorderRadius.circular(50),
       ),
-      child: GetBuilder<QuestionControllere>(
-          init: QuestionControllere(),
+      child: GetBuilder<QuestionController>(
+          init: QuestionController(),
           builder: (controller) {
             
             return Stack(

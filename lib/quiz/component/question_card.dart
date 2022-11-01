@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzzzz/constants/constans.dart';
 import 'package:quizzzzz/controlles/question_controller.dart';
+import 'package:quizzzzz/models/model.dart';
 
-import '../../constants/constans.dart';
-import '../../models/model.dart';
 import 'option.dart';
 
-class QuestionmCard extends StatelessWidget {
-  const QuestionmCard({
+class QuestionCard extends StatelessWidget {
+  const QuestionCard({
     Key key,
+    // it means we have to pass thisS
     @required this.question,
   }) : super(key: key);
 
@@ -16,8 +17,7 @@ class QuestionmCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionControllere _controller = Get.put(QuestionControllere());
-
+    QuestionController _controller = Get.put(QuestionController());
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
       padding: EdgeInsets.all(kDefaultPadding),
@@ -34,9 +34,7 @@ class QuestionmCard extends StatelessWidget {
                 .headline6
                 .copyWith(color: kBlackColor),
           ),
-          SizedBox(
-            height: kDefaultPadding / 2,
-          ),
+          SizedBox(height: kDefaultPadding / 2),
           ...List.generate(
             question.options.length,
             (index) => Option(

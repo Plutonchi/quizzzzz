@@ -1,74 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:quizzzzz/constants/constans.dart';
 import 'package:quizzzzz/controlles/question_controller.dart';
-import 'package:quizzzzz/quiz/component/question_card.dart';
+import 'package:quizzzzz/quiz/component/progress.dart';
 
-import 'progress.dart';
+import 'question_card.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key key});
+  const Body({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    QuestionControllere _questionsController = Get.put(QuestionControllere());
+    // So that we have acccess our controller
+    QuestionController _questionController = Get.put(QuestionController());
     return Stack(
       children: [
-        Image.asset(
-          "assets/bakk.jpg",
-          fit: BoxFit.fill,
-        ),
+        Image.asset("assets/bakk.jpg", fit: BoxFit.fill),
         SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 child: ProgressBar(),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: kDefaultPadding),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 child: Obx(
                   () => Text.rich(
                     TextSpan(
                       text:
-                          "Question ${_questionsController.questionNumber.value}",
+                          "Question ${_questionController.questionNumber.value}",
                       style: Theme.of(context)
                           .textTheme
                           .headline4
-                          .copyWith(color: kGrayColor),
+                          .copyWith(color: Colors.white),
                       children: [
                         TextSpan(
-                            text: "/${_questionsController.questions.length}",
-                            style: TextStyle(fontSize: 15)),
+                          text: "/${_questionController.questions.length}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              .copyWith(color: Colors.white),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-              Divider(
-                thickness: 1.5,
-              ),
-              SizedBox(
-                height: kDefaultPadding,
-              ),
+              Divider(thickness: 1.5),
+              SizedBox(height: kDefaultPadding),
               Expanded(
                 child: PageView.builder(
-                  onPageChanged: _questionsController.updateTheQnNum,
+                  // Block swipe to next qn
                   physics: NeverScrollableScrollPhysics(),
-                  controller: _questionsController.pageController,
-                  itemCount: _questionsController.questions.length,
-                  itemBuilder: (context, index) => QuestionmCard(
-                    question: _questionsController.questions[index],
-                  ),
+                  controller: _questionController.pageController,
+                  onPageChanged: _questionController.updateTheQnNum,
+                  itemCount: _questionController.questions.length,
+                  itemBuilder: (context, index) => QuestionCard(
+                      question: _questionController.questions[index]),
                 ),
               ),
             ],
           ),
-        ),
+        )
       ],
     );
   }

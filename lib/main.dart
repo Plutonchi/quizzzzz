@@ -3,11 +3,11 @@ import 'package:quizzzzz/quiz/quiz.dart';
 import 'package:quizzzzz/welcomePage/WelcomePage.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({ Key key});
+  MyApp({Key key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: "Quiz App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: QuizScreen(),
+      home: WelcomPage(),
     );
   }
 }

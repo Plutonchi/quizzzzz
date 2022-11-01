@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:quizzzzz/constants/constans.dart';
 import 'package:quizzzzz/controlles/question_controller.dart';
-
-import '../../constants/constans.dart';
 
 class Option extends StatelessWidget {
   const Option({
@@ -17,15 +16,15 @@ class Option extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuestionControllere>(
-        init: QuestionControllere(),
-        builder: (qnConroller) {
+    return GetBuilder<QuestionController>(
+        init: QuestionController(),
+        builder: (qnController) {
           Color getTheRightColor() {
-            if (qnConroller.isAnswered) {
-              if (index == qnConroller.correctAns) {
+            if (qnController.isAnswered) {
+              if (index == qnController.correctAns) {
                 return kGreenColor;
-              } else if (index == qnConroller.selectedAns &&
-                  qnConroller.selectedAns != qnConroller.correctAns) {
+              } else if (index == qnController.selectedAns &&
+                  qnController.selectedAns != qnController.correctAns) {
                 return kRedColor;
               }
             }
@@ -33,27 +32,24 @@ class Option extends StatelessWidget {
           }
 
           IconData getTheRightIcon() {
-            return getTheRightIcon() == kRedColor ? Icons.close : Icons.done;
+            return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
           }
 
           return InkWell(
             onTap: press,
             child: Container(
-              width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: kDefaultPadding),
               padding: EdgeInsets.all(kDefaultPadding),
               decoration: BoxDecoration(
-                  border: Border.all(color: getTheRightColor()),
-                  borderRadius: BorderRadius.circular(15)),
+                border: Border.all(color: getTheRightColor()),
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${index + 1}$text",
-                    style: TextStyle(
-                      color: getTheRightColor(),
-                      fontSize: 16,
-                    ),
+                    "${index + 1}. $text",
+                    style: TextStyle(color: getTheRightColor(), fontSize: 16),
                   ),
                   Container(
                     height: 26,
@@ -67,11 +63,8 @@ class Option extends StatelessWidget {
                     ),
                     child: getTheRightColor() == kGrayColor
                         ? null
-                        : Icon(
-                            getTheRightIcon(),
-                            size: 16,
-                          ),
-                  ),
+                        : Icon(getTheRightIcon(), size: 16),
+                  )
                 ],
               ),
             ),

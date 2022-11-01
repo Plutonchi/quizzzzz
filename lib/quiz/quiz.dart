@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-
-import 'component/body.dart';
+import 'package:get/get.dart';
+import 'package:quizzzzz/controlles/question_controller.dart';
+import 'package:quizzzzz/quiz/component/body.dart';
 
 class QuizScreen extends StatelessWidget {
-  const QuizScreen({Key key});
-
   @override
   Widget build(BuildContext context) {
+    QuestionController _controller = Get.put(QuestionController());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
+        // Fluttter show the back button automatically
         backgroundColor: Colors.transparent,
+        elevation: 0,
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Skip",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          TextButton(onPressed: _controller.nextQuestion, child: Text("Skip")),
         ],
       ),
       body: Body(),
